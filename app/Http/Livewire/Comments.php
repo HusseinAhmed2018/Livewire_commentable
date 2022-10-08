@@ -10,16 +10,18 @@ use Livewire\Component;
 class Comments extends Component
 {
     public $post,$comment,$comments;
+    public $parent_id = null;
+    public $form_title = 'Comment';
 
     public function mount($post)
     {
         $this->post = $post;
-        $this->comments = $post->comments;
+        $this->comments = $post->comments()->with('replies')->get();
     }
 
     public function render()
     {
-        return view('livewire.comments');
+        return view('livewire.comments')->extends('layouts.app')->section('content');
     }
 
     public function submit()
@@ -30,7 +32,8 @@ class Comments extends Component
 
         $comments = $this->post->comments()->create([
             'body'      => $this->comment,
-            'user_id'   => Auth::id()
+            'user_id'   => Auth::id(),
+            'parent_id' => $this->parent_id
         ]);
 
         if ($comments)
@@ -39,4 +42,9 @@ class Comments extends Component
         }
     }
 
+    public function replay($parent_id)
+    {
+        $this->parent_id = $parent_id;
+        $this->form_title = 'replay';
+    }
 }
