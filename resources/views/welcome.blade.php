@@ -35,9 +35,7 @@
                     @endauth
                 </div>
             @endif
-
-                <livewire:comments/>
-            </div>
+         </div>
         </div>
     </body>
 </html>

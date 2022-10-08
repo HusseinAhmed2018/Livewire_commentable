@@ -3,7 +3,7 @@
     <h4>comments ...</h4>
     <div class="row">
         <div class="col-12">
-            <h2>Comments {{ $test }}</h2>
+            <h2>Comments</h2>
             <form wire:submit.prevent="submit">
                 <textarea class="form-group" wire:model="comment" id="comment" placeholder="Write your comment here" rows="4" cols="36"></textarea>
                 <br>
